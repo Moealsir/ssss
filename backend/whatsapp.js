@@ -130,7 +130,8 @@ async function SendVerificationCode(phoneNumber, code) {
     // Remove the '+' from the phone number
     const sanitizedPhoneNumber = phoneNumber.startsWith('+') ? phoneNumber.slice(1) : phoneNumber;
     const whatsnumber = sanitizedPhoneNumber + '@c.us';
-    bot.sendMessage(whatsnumber, `Your verification code is ${code}`);
+    bot.sendMessage(whatsnumber, `Your verification code for WhatMail is ${code}. Please use this code to verify your account. If you did not request this, please disregard this message. Thank you.`);
+
 }
 
 async function SendToUser(phoneNumber, message) {

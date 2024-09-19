@@ -1,3 +1,5 @@
+
+
 import Image from "next/image";
 import Logo from "../public/logo.png";
 
@@ -18,15 +20,15 @@ export default function Navbar() {
             <nav aria-label="Global">
               <ul className="flex items-center gap-6 text-sm">
                 <li>
-                  <a className="text-gray-500 transition hover:text-gray-500/75" href="#Footer"> About </a>
+                  <a className="text-gray-400 transition hover:text-gray-600 font-bold text-lg" href="#Footer"> About </a>
                 </li>
     
                 <li>
-                  <a className="text-gray-500 transition hover:text-gray-500/75" href="#Features"> Features </a>
+                  <a className="text-gray-400 transition hover:text-gray-600 font-bold text-lg" href="#Features"> Features </a>
                 </li>
     
                 <li>
-                  <a className="text-gray-500 transition hover:text-gray-500/75" href="#Team"> Team </a>
+                  <a className="text-gray-400 transition hover:text-gray-600 font-bold text-lg" href="#Team"> Team </a>
                 </li>
               </ul>
             </nav>

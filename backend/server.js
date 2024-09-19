@@ -75,9 +75,12 @@ const upload = multer({ dest: 'uploads/' });
         }
     });
 
-    // نسيت دايرنو في شنو
-    app.get('/health', (req, res) => {
-        res.status(200).send('OK');
+
+    app.get('/api/check-session', (req, res) => {
+        if (req.session && req.session.username) {
+            return res.status(200).json({ isLoggedIn: true, username: req.session.username });
+          }
+          return res.status(200).json({ isLoggedIn: false });
     });
 
     app.post('/api/login', async (req, res) => {
@@ -131,6 +134,9 @@ const upload = multer({ dest: 'uploads/' });
         }
     });
     
+    app.get('/success', (req, res) => {
+        res.send('Authorization successful! You can close this window or go back to the app.');
+    });
     
     // signup api
     app.post('/api/signup', async (req, res) => {
@@ -178,10 +184,11 @@ const upload = multer({ dest: 'uploads/' });
                 "INSERT INTO emails (user_id, email, client_id, client_secret) VALUES (?, ?, ?, ?)",
                 [userId, email, clientId, clientSecret]
             );
-            console.log('Credentials saved to database successfully.');
+            // console.log('Credentials saved to database successfully.');
             // await bot.sendMessage(phoneNumber, `Welcome to the Gmail to WhatsApp app, ${username}!`);
             console.log('Welcome message sent to WhatsApp.');
             res.status(201).json({ 'message': 'User created successfully.', userId });
+
         } catch (err) {
             console.error(err.message);
             return res.status(500).json({ 'error': 'SignUp - Database error.' });
@@ -238,7 +245,7 @@ const upload = multer({ dest: 'uploads/' });
     });
 
     app.get('/success', (req, res) => {
-        res.send('Authorization successful! You can close this window or go back to the app.');
+        res.status(200).json({ message: "Authorization successful! You can close this window or go back to the app." });
     });
 
     // http://wm.moealsir.tech/authorize?user_id=2&email=mohamedwdalsir@gmail.com
@@ -294,7 +301,7 @@ const upload = multer({ dest: 'uploads/' });
             const { tokens } = await oauth2Client.getToken(req.query.code);
             await SaveToken(user_id, email, tokens);
             await UpdateAuthorizationStatus(user_id, email, true);
-            console.log(res)
+            // console.log(res)
             res.redirect('/success');
         } catch (err) {
             console.error(err.message);
