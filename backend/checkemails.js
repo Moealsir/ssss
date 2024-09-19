@@ -127,7 +127,7 @@ async function summarizeAndSendEmail(senderName, receiverEmail, senderEmail, sub
 
     console.log(`in function summarizeAndSendEmail phone number is : ${phoneNumber}`)
     // console.log("sending summary")
-    const messageContent = `*From: ${senderName}* <${senderEmail}>\n*To:* ${receiverEmail}\n*Subject: ${subject}\n\n${summary}\n\n${rating}`
+    const messageContent = `*From: ${senderName}* <${senderEmail}>\n*To:* ${receiverEmail}\n*Subject:* ${subject}\n\n${summary}\n\n${rating}`
     // await SendToUser(phoneNumber, summary);
     console.log("sending messageContent")
     await SendToUser(phoneNumber, messageContent);
