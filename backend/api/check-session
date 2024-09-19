@@ -1,7 +1,0 @@
-// /pages/api/check-session.js
-export default async function handler(req, res) {
-  if (req.session && req.session.username) {
-    return res.status(200).json({ isLoggedIn: true, username: req.session.username });
-  }
-  return res.status(200).json({ isLoggedIn: false });
-}
