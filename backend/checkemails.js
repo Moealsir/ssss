@@ -137,9 +137,9 @@ async function summarizeAndSendEmail(senderName, receiverEmail, senderEmail, sub
 
 async function summarizeEmailContent(senderName, senderEmail, subject, content) {
     const prompts = [
-      `Act as my personal assistant and summarize the following email in one to two paragraphs, highlighting important details:\n\n${content}`,
-      `Provide a summary for the following email, focusing on key points in one or two paragraphs:\n\n${content}`,
-      `Summarize this email content in one or two paragraphs, focusing on important details:\n\n${content}`
+      `Act as my personal assistant and summarize the following email from ${senderName} (${senderEmail}) regarding "${subject}" in one to two paragraphs, highlighting important details:\n\n${content}`,
+      `Provide a summary for the following email from ${senderName} (${senderEmail}) with the subject "${subject}", focusing on key points in one or two paragraphs:\n\n${content}`,
+      `Summarize this email from ${senderName} (${senderEmail}), subject "${subject}", in one or two paragraphs, focusing on important details:\n\n${content}`
     ];
     return retryWithDelay(async (prompt) => {
       const result = await model.generateContent(prompt);
@@ -148,21 +148,21 @@ async function summarizeEmailContent(senderName, senderEmail, subject, content) 
       return text.trim();
     }, prompts);
   }
-
-
-  async function rateEmailContent(senderEmail, subject, content) {
-    const prompts = [
-      `Rate the following email content as spam from 0 to 10, using these ratings: 0️⃣: ❌ | 1️⃣: 🚫 | 2️⃣: 🛑 | 3️⃣: ⚠️ | 4️⃣: 🔴 | 5️⃣: 🟠 | 6️⃣: 🟡 | 7️⃣: 🟢 | 8️⃣: 🔵 | 9️⃣: 🟣 | 🔟: 🌟. The email content is:\n\n${content}\n\n\n you don't have to explain the reason of the rate and remember to send number and emoji .`,
-      `Please rate the following email content from 0 to 10 for its likelihood of being spam, using the provided rating scale: 0️⃣: ❌ | 1️⃣: 🚫 | 2️⃣: 🛑 | 3️⃣: ⚠️ | 4️⃣: 🔴 | 5️⃣: 🟠 | 6️⃣: 🟡 | 7️⃣: 🟢 | 8️⃣: 🔵 | 9️⃣: 🟣 | 🔟: 🌟. The email content is:\n\n${content}\n\n\n you don't have to explain the reason of the rate and remember to send number and emoji .`,
-      `Evaluate the following email content and rate it as spam from 0 to 10, using this scale: 0️⃣: ❌ | 1️⃣: 🚫 | 2️⃣: 🛑 | 3️⃣: ⚠️ | 4️⃣: 🔴 | 5️⃣: 🟠 | 6️⃣: 🟡 | 7️⃣: 🟢 | 8️⃣: 🔵 | 9️⃣: 🟣 | 🔟: 🌟. Here is the content:\n\n${content}\n\n\n you don't have to explain the reason of the rate and remember to send number and emoji .`
-    ];
-    return retryWithDelay(async (prompt) => {
-      const result = await model.generateContent(prompt);
-      const response = result.response;
-      const text = await response.text();
-      return text.trim();
-    }, prompts);
-  }
+  
+async function rateEmailContent(senderName, senderEmail, subject, content) {
+const prompts = [
+    `Rate the following email from ${senderName} (${senderEmail}) with the subject "${subject}" as spam from 0 to 10, using these ratings: 0️⃣: ❌ | 1️⃣: 🚫 | 2️⃣: 🛑 | 3️⃣: ⚠️ | 4️⃣: 🔴 | 5️⃣: 🟠 | 6️⃣: 🟡 | 7️⃣: 🟢 | 8️⃣: 🔵 | 9️⃣: 🟣 | 🔟: 🌟. The email content is:\n\n${content}\n\n\n You don't have to explain the reason for the rating and remember to send a number and emoji.`,
+    `Please rate the following email from ${senderName} (${senderEmail}), subject "${subject}", from 0 to 10 for its likelihood of being spam, using the provided rating scale: 0️⃣: ❌ | 1️⃣: 🚫 | 2️⃣: 🛑 | 3️⃣: ⚠️ | 4️⃣: 🔴 | 5️⃣: 🟠 | 6️⃣: 🟡 | 7️⃣: 🟢 | 8️⃣: 🔵 | 9️⃣: 🟣 | 🔟: 🌟. The email content is:\n\n${content}\n\n\n You don't have to explain the reason for the rating and remember to send a number and emoji.`,
+    `Evaluate the following email from ${senderName} (${senderEmail}), subject "${subject}", and rate it as spam from 0 to 10, using this scale: 0️⃣: ❌ | 1️⃣: 🚫 | 2️⃣: 🛑 | 3️⃣: ⚠️ | 4️⃣: 🔴 | 5️⃣: 🟠 | 6️⃣: 🟡 | 7️⃣: 🟢 | 8️⃣: 🔵 | 9️⃣: 🟣 | 🔟: 🌟. Here is the content:\n\n${content}\n\n\n You don't have to explain the reason for the rating and remember to send a number and emoji.`
+];
+return retryWithDelay(async (prompt) => {
+    const result = await model.generateContent(prompt);
+    const response = result.response;
+    const text = await response.text();
+    return text.trim();
+}, prompts);
+}
+  
 
 // main function that check new emails for users
     async function startCheckingEmails() {
