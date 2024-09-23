@@ -1,32 +1,53 @@
-# Major - Auto Claim Bot
+📞 Contact
 
-🔗 **Referral Link**: [Major](https://t.me/major/start?startapp=5914982564)
+If you encounter any issues or have questions, feel free to reach out:
 
-## 📢 Telegram Group
+- Contact: t.me/Airliner9
+- Group: t.me/KeoAirDropFreeNe
+- Channel: t.me/KeoAirDropFreeNee
 
-Join our Telegram group to stay updated and get instructions on how to use this tool:
+## 🚀 Getting Started
 
-- [Smart Airdrop](https://t.me/smartairdrop2120)
-- [Smart Airdrop - Channel](https://t.me/smartairdrop_channel)
+To get started with the bot, follow these steps:
 
-## 🌟 Features
+1. **Install Dependencies and Modules:**
 
-| Feature              | Status | Description                                       |
-| -------------------- | ------ | ------------------------------------------------- |
-| Auto Check-in        | On/Off | Claim daily bonus to get more points              |
-| Auto Do Task         | On/Off | Complete tasks                                    |
-| Auto Play Hold Coin  | On/Off | Play Hold Coin to get as many points as possible  |
-| Auto Spin            | On/Off | Spin to get random reward                         |
-| Auto Play Swipe Coin | On/Off | Play Swipe Coin to get as many points as possible |
+   ```
+   npm i; npm i axios https-agent-proxy colors
+   ```
 
-## 🚀 Run File
+2. **Prepare Configuration Files:**
 
-| Run with Proxy                   | Run without Proxy   |
-| -------------------------------- | ------------------- |
-| `bot-proxy.py` `data-proxy.json` | `bot.py` `data.txt` |
+   You'll need to set up a few configuration files for the bot to work properly.
 
-## ⚠️ Note
+## 📁 Configuration Files
 
-- Get auth data (`query_id=... /user=...`) in the `Application` tab in DevTools.
-- Auto features: Change `false` to `true` in the `config.json` file.
-- Supported commands: `/run_bot` `/query_id` `/proxy` `/proxy_web` (Join group to use these commands).
+### 1. `configs.json` 📜
+
+```json - If u want to spin boost because spin sometime broken...
+{
+  "spin": true
+}
+```
+
+### 2. `datas.txt` 🗂️
+
+```txt
+user=xxx/query_id=xxx
+user=xxx/query_id=xxx
+user=xxx/query_id=xxx
+```
+
+3. `proxies.txt` 🌐
+
+```txt
+http://user:password@host:port
+http://user:password@host:port
+http://user:password@host:port
+```
+
+💡 Usage:
+
+    To run the bot, use the following command: node 1
+
+🎇Enjoy!
