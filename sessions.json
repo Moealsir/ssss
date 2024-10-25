@@ -6,5 +6,37 @@
         "api_hash":"3c09eb584afbbd05eade0423eb8b7fdc",
         "phone_number":"212617457183",
         "session_file":"sessions\\212617457183.session"
+    },
+    {
+        "id":2,
+        "name":"zol 2",
+        "api_id":"26451878",
+        "api_hash":"ce2f9bb8cbdc58b53a6f1c9bdda5aeed",
+        "phone_number":"212617444171",
+        "session_file":"sessions\\212617444171.session"
+    },
+    {
+        "id":3,
+        "name":"zol 3",
+        "api_id":"22438597",
+        "api_hash":"49b31e0a4fbb86d5a94d3dee9eb43bad",
+        "phone_number":"212617457588",
+        "session_file":"sessions\\212617457588.session"
+    },
+    {
+        "id":4,
+        "name":"zol 4",
+        "api_id":"28586288",
+        "api_hash":"ead9a8ef7677c45acd038c074ff759cf",
+        "phone_number":"212691427146",
+        "session_file":"sessions\\212691427146.session"
+    },
+    {
+        "id":5,
+        "name":"zol 5",
+        "api_id":"25276276",
+        "api_hash":"922f857e959e0ad1f097d8c9aa034e1d",
+        "phone_number":"212691403503",
+        "session_file":"sessions\\212691403503.session"
     }
 ]
