@@ -1,3 +1,0 @@
-telethon==1.36.0
-pyrogram==2.0.106
-cryptography==43.0.0
