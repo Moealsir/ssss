@@ -1,0 +1,143 @@
+Project Overview
+Build a production-ready WhatsApp API gateway where users can:
+Authenticate via Supabase (Email + Google OAuth)
+Connect multiple WhatsApp numbers using wweb.js with auto-reconnection
+Generate API keys to access RESTful endpoints compatible with N8N/Zapier
+Receive real-time message events via configurable webhooks
+Manage media/files (auto-deleted daily at 00:00 user-local time)
+Core Features
+1. User Authentication & Management
+Supabase Auth:
+Email/password login
+Google OAuth integration
+JWT-based API keys (generated per user, revocable)
+Security Enhancement: Implement encrypted storage for session data in the database
+Dashboard:
+API key management (create/revoke keys)
+Active WhatsApp sessions monitoring
+Connection status indicators
+2. WhatsApp Integration
+Multi-Number Support:
+Users can connect unlimited numbers via QR scanning (wweb.js)
+Each number has a unique sessionId
+Clear visual indication of active/inactive sessions
+Auto-Reconnect:
+Automatically restore sessions on disconnect
+Status indicators (Online/Offline/Connecting)
+Reconnection attempt logging
+Session Persistence:
+Store encrypted session data in Supabase PostgreSQL
+Secure handling of authentication tokens
+3. API Endpoints
+RESTful JSON API (documented with Swagger/Postman examples):
+bash
+# Send text message
+POST /api/send  
+Headers: { "Authorization": "Bearer <API_KEY>" }  
+Body: { "sessionId": "wa_123", "to": "+1234567890", "text": "Hello" }  
+
+# Send media (image/document)
+POST /api/send-media  
+Body: { "sessionId": "wa_123", "to": "+1234567890", "mediaUrl": "https://..." }  
+
+# Reply to message
+POST /api/reply  
+Body: { "sessionId": "wa_123", "messageId": "msg_abc", "text": "Reply text" }  
+
+# Get group members
+GET /api/groups/{groupId}/members  
+Rate Limiting:
+60 requests/minute per API key (adjustable )
+Clear error responses when limits are exceeded
+4. Real-Time Webhooks
+User Configurable:
+Set callback URLs for events: message_received, message_delivered, message_read
+Payload includes sender info, message content, and media links
+Custom HTTP headers support
+Security:
+HMAC-signed payloads (X-Signature header)
+Retry failed deliveries (3 attempts with exponential backoff)
+Webhook health monitoring
+Testing:
+"Test Webhook" button in dashboard sends a mock event
+Webhook delivery logs
+5. Media & Storage
+Supabase Storage:
+Upload images/videos/documents via API or UI
+Generate shareable URLs for media messages
+File type validation and size limits
+Auto-Cleanup:
+Cron job deletes files at 00:00 user-local time (Vercel/Next.js API route)
+Configurable retention period (default: 24 hours)
+6. Logging & Analytics
+Message Logs:
+Timestamp, sender/recipient, status (sent/delivered/failed)
+Filter by date/sessionId
+Exportable logs (CSV/JSON)
+API Audit:
+Track all API calls (key used, endpoint, timestamp)
+Error logging and monitoring
+7. Group Management
+Send to Groups:
+POST /api/send-group { "sessionId": "wa_123", "groupId": "xyz", "text": "Hi all!" }
+Support for media messages to groups
+Export Members:
+GET /api/groups/{groupId}/members returns member list
+Format options (JSON/CSV)
+Technical Stack
+Frontend:
+Next.js 14 (App Router) + Tailwind CSS
+ShadCN UI for pre-built components (buttons, tables)
+Responsive design for mobile/desktop
+Backend:
+Next.js API routes (Edge Runtime)
+wweb.js for WhatsApp Web (with multi-device support)
+Encryption libraries for session data security
+Database/Storage:
+Supabase (PostgreSQL for auth/sessions, Storage for media)
+Encrypted session data storage
+Cron Jobs:
+Timezone-aware cleanup via Vercel Cron or Next.js route.ts
+Configurable schedules
+Deliverables
+Next.js Frontend:
+Responsive UI for auth, API key management, WhatsApp connection, logs
+Interactive API docs (like Postman)
+User-friendly QR code scanning interface
+Backend:
+Optimized wweb.js session handling (avoid memory leaks)
+Webhook queue (ensure no event drops)
+Secure session encryption implementation
+Documentation:
+API reference (cURL, Python, Node.js examples)
+Webhook setup guide for N8N
+Deployment instructions
+Implementation Guidelines
+Security Considerations:
+Implement proper encryption for session data in the database
+Use environment variables for sensitive credentials
+Implement rate limiting and API key validation
+Sanitize all user inputs
+Performance Optimization:
+Optimize wweb.js memory usage
+Implement efficient database queries
+Use edge functions where appropriate for global performance
+User Experience:
+Clear error messages and status indicators
+Intuitive dashboard layout
+Comprehensive documentation
+Deployment:
+Vercel deployment configuration
+Database migration scripts
+Environment setup guide
+Development Approach
+Set up Supabase authentication and database schema
+Implement wweb.js integration with session management
+Develop core API endpoints
+Build webhook delivery system
+Create frontend dashboard
+Implement media handling and storage
+Add logging and analytics features
+Develop group management functionality
+Implement security features including session encryption
+Create comprehensive documentation
